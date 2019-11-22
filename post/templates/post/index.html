@@ -1,0 +1,36 @@
+{% extends 'post/base.html' %}
+
+{% block content%}
+
+{% for post in object_list reversed %}
+          
+          <!-- Blog Post -->
+        <div class="card mb-4">
+            <img class="card-img-top" src="{{ post.cover.url}}" alt="Card image cap">
+            <div class="card-body">
+              <h2 class="card-title">{{ post.title }}</h2>
+              <p class="card-text">{{ post.text }}</p>
+              <a href="#" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <hr>
+            <p class="card-text">     &nbsp comments</p>
+            <hr>
+            {% for i in post.pd.all %}
+            <div class="card-body">
+                <div class="card-footer text-muted">
+              
+                {{i.comment}}
+              
+                </div>
+              </div>
+            {% endfor %}
+            <div class="card-footer text-muted">
+                <a class="nav-link" href="{% url 'add_like' post.id %}"><i class="fa fa-thumbs-up" aria-hidden="true"></i>like({{post.likes}})</a> posted on {{post.created_at}}
+              
+        
+            </div>
+          </div>
+
+        {% endfor %}
+ {% endblock %}        
+        
